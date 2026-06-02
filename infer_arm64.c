@@ -151,6 +151,7 @@ int main(int argc, char *argv[]) {
 
     /* ── 1. Load pre-tokenized inputs ─────────────────────────────────────── */
     printf("► Loading inputs from %s …\n", input_path);
+    fflush(stdout);
     InputData *inp = load_inputs(input_path);
     if (!inp) return 1;
     printf("  %d domains, seq_len=%d, embed_dim=%d\n",
@@ -170,6 +171,7 @@ int main(int argc, char *argv[]) {
 
     /* ── 3. Create session (loads and optimizes the ONNX graph) ───────────── */
     printf("► Loading ONNX model: %s …\n", model_path);
+    fflush(stdout);
     double t_load0 = now_ms();
     OrtSession *session;
     OrtStatus *status = ort->CreateSession(env, model_path, opts, &session);
